@@ -115,6 +115,8 @@ Remove-Item -Force -Verbose -Recurse -ErrorAction SilentlyContinue
 Write-Verbose " Running Windows disk Clean up Tool" -ForegroundColor Cyan
 cleanmgr /AUTOCLEAN | out-Null
 Start-Process -FilePath cleanmgr /verylowdisk -NoNewWindow
+Write-Host "Clean Up Task completed !"
+
 
 #Kill diskclean after 10 minutes
 #Start-Sleep -s 900
