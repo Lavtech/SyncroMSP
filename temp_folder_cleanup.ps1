@@ -15,9 +15,9 @@
 Import-Module $env:SyncroModule
 
 # Enter your Company information here:
-$subdomain = "vitaltechservices"
-$email = "tim.golden@vitaltechservices.com"
-$TicketTime = 5  # This is the number of minutes you want added to the ticket
+$subdomain = "lavtech"
+$email = "john@lavtechcomputers.com"
+$TicketTime = 0  # This is the number of minutes you want added to the ticket
 # get some disk info
 
 $Before = Get-WmiObject Win32_LogicalDisk | Where-Object { $_.DriveType -eq "3" } | Select-Object SystemName,
@@ -43,14 +43,14 @@ $objShell = New-Object -ComObject Shell.Application
 $objFolder = $objShell.Namespace(0xA)
 $ErrorActionPreference = "silentlycontinue"
                     
-Start-Transcript -Path C:\VITALDepartment\$LogDate.log
+Start-Transcript -Path C:\ProgramData\LTC\$LogDate.log
 
 ## Cleans all code off of the screen.
 ##Clear-Host
 
 ##  create restore point
-Checkpoint-Computer -Description "Weekly Maintanence" -RestorePointType "MODIFY_SETTINGS"
-Write-Host "System Restore Point created successfully"
+#Checkpoint-Computer -Description "Tempfolder Cleanup" -RestorePointType "MODIFY_SETTINGS"
+#Write-Host "System Restore Point created successfully"
 ## end restore point
 
 $size = Get-ChildItem C:\Users\* -Include *.iso, *.vhd -Recurse -ErrorAction SilentlyContinue | 
@@ -90,7 +90,7 @@ remove-item -force -Verbose -recurse -ErrorAction SilentlyContinue
 
 
 ## Deletes the log file of the VITAL folder.
-Get-ChildItem "C:\VITALDepartment\*.log" -Recurse -Force -Verbose -ErrorAction SilentlyContinue |
+#Get-ChildItem "C:\ProgramData\LTC\*.log" -Recurse -Force -Verbose -ErrorAction SilentlyContinue |
 Where-Object { ($_.CreationTime -lt $(Get-Date).AddDays(-$DaysToDelete)) } |
 remove-item -force -Verbose -recurse -ErrorAction SilentlyContinue
 ## The Contents of the log file of the VITAL  have been removed successfully!
@@ -114,12 +114,12 @@ Remove-Item -Force -Verbose -Recurse -ErrorAction SilentlyContinue
 #Running Disk Clean up Tool
 Write-Verbose " Running Windows disk Clean up Tool" -ForegroundColor Cyan
 cleanmgr /AUTOCLEAN | out-Null
-Start-Process -FilePath cleanmgr /verylowdisk
+Start-Process -FilePath cleanmgr /verylowdisk -NoNewWindow
 
 #Kill diskclean after 10 minutes
-Start-Sleep -s 900
-taskkill /IM "cleanmgr.exe" /f
-Write-Host "Clean Up Task completed !"          
+#Start-Sleep -s 900
+#taskkill /IM "cleanmgr.exe" /f
+#Write-Host "Clean Up Task completed !"          
 
 ## Sends some before and after info for ticketing purposes
 Hostname ; Get-Date | Select-Object DateTime
@@ -152,8 +152,8 @@ $ticket = $varTicket.ticket.number
 
 
 #Create Syncro ticket
-#$value = Create-Syncro-Ticket -Subdomain "subdomain" -Subject "New Ticket for $problem" -IssueType "Other" -Status "New"
-#$ticket = $value.ticket.id
+$value = Create-Syncro-Ticket -Subdomain "subdomain" -Subject "New Ticket for $problem" -IssueType "Other" -Status "New"
+$ticket = $value.ticket.id
 
 
 # Add time to ticket
@@ -165,14 +165,14 @@ Create-Syncro-Ticket-Comment -Subdomain $subdomain -TicketIdOrNumber $ticket -Su
 
 #Close Ticket
 # removed per syncro
-# Update-Syncro-Ticket -Subdomain $subdomain -TicketIdOrNumber $ticket -Status "Resolved" #-CustomFieldName "Automation Results" -CustomFieldValue "Completed"
+ Update-Syncro-Ticket -Subdomain $subdomain -TicketIdOrNumber $ticket -Status "Resolved" #-CustomFieldName "Automation Results" -CustomFieldValue "Completed"
 
 #Change status to Resolved/reference ticket elsewhere
-Update-Syncro-Ticket -Subdomain "subdomain" -TicketIdOrNumber $ticket -Status "Resolved" 
+#Update-Syncro-Ticket -Subdomain "subdomain" -TicketIdOrNumber $ticket -Status "Resolved" 
 
 # Uncomment to upload the file if you prefer
-#Upload-File -Subdomain $subdomain -FilePath "C:\VITALDepartment\$LogDate.log"
-Upload-File -Subdomain "vitaltechservices" -FilePath "C:\VITALDepartment\$LogDate.log"
+Upload-File -Subdomain $subdomain -FilePath "C:\ProgramData\LTC\$LogDate.log"
+#Upload-File -Subdomain "vitaltechservices" -FilePath "C:\VITALDepartment\$LogDate.log"
 
 ## Restart the Windows Update Service
 Get-Service -Name wuauserv | Start-Service -Verbose
