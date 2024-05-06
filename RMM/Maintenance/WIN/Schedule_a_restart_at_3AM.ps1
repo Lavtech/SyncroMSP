@@ -1,5 +1,4 @@
 # Create a Scheduled Task to run once 
-Import-Module $env:SyncroModule
 # Specify the account to run the script
 $User= "NT AUTHORITY\SYSTEM" 
 $taskAction = New-ScheduledTaskAction `
@@ -15,7 +14,7 @@ $tasktrigger
 
 # Register the new PowerShell scheduled task
 # The name of your scheduled task.
-$taskName = "ScheduledRestart"
+$taskName = "LTC ScheduledRestart"
 
 
 # Special fix.  Wouldn't overwrite a task of the same name
