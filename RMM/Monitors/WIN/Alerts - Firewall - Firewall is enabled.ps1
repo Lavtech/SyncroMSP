@@ -1,6 +1,6 @@
 # Import Syncro Module if it's not already loaded
 
-Import-Module $env:SyncroModule
+#Import-Module $env:SyncroModule
 
 # Check the status of the Firewall for all profiles
 $firewallProfiles = Get-NetFirewallProfile
