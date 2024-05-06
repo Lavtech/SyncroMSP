@@ -14,7 +14,7 @@ $tasktrigger
 
 # Register the new PowerShell scheduled task
 # The name of your scheduled task.
-$taskName = "LTC ScheduledRestart"
+$taskName = "ltc.ScheduledRestart"
 
 
 # Special fix.  Wouldn't overwrite a task of the same name
