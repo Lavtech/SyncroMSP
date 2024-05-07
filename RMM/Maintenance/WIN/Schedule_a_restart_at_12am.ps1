@@ -1,4 +1,4 @@
-Import-Module $env:SyncroModule
+
 
 # Create a Scheduled Task to run once 
 # Specify the account to run the script
