@@ -27,7 +27,7 @@ Write-Host "Architecture: $(switch($CpuInfo.Architecture) {
 Write-Host "Processor ID: $($CpuInfo.ProcessorId)"
 
 # Extract and simplify CPU model name using regex
-if ($CpuInfo.Name -match 'Intel|AMD') {
+if ($CpuInfo.Name -match 'Intel') {
     $modelMatch = $CpuInfo.Name -match '(i[3579]-\d{4,5}[A-Z]*)'
     if ($modelMatch) {
         $simplifiedModel = $matches[0]  # This uses the automatic $matches array provided by PowerShell
