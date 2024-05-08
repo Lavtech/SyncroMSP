@@ -1,4 +1,4 @@
-// Define a dictionary mapping AMD models to their release year
+
 {
     "AMD"; [
     { "Model": "Ryzen 9 7950X", "Year": 2022 },
@@ -21,7 +21,7 @@
 
 
 
-// Define a dictionary mapping Intel models to their release year
+
  "Intel"; [
     { "Model": "Intel Core i9-14900", "Year": 2023 },
     { "Model": "Intel Core i9-13900", "Year": 2022 },
