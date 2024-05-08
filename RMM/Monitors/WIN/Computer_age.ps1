@@ -67,4 +67,4 @@ $pc_age = $latestVersion - $currentVersion
 Write-Host "The computer is $pc_age years old."
 
 Write-Host "Adding this info to the asset custom field PC_Age_In_Years"
-Set-Asset-Field -Name "PC_Age_In_Years" -Value "$pc_age Years"
+Set-Asset-Field -Name "PC_Age_In_Years" -Value $pc_age
