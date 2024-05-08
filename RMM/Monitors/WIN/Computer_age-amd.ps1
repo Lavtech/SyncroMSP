@@ -1,5 +1,5 @@
 try {
-    $response = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Lavtech/SyncroMSP/main/RMM/cpu_list"
+    $response = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Lavtech/SyncroMSP/main/RMM/cpu_list.json"
     if ($response -is [String]) {
         $response = $response | ConvertFrom-Json
     }
