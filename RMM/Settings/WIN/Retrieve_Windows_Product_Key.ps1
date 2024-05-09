@@ -27,4 +27,4 @@ for ($i = 24; $i -ge 0; $i--) {
 Write-Output "Windows Product Key: $productKey"
 
 # This can write to your Asset Custom Fields. Use it to store adhoc information that isn't currently surfaced.
-Set-Asset-Field -Name "Windows_Key" -Value $key
+Set-Asset-Field -Name "Windows_Key" -Value $productKey
