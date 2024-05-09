@@ -37,4 +37,4 @@ if ($officeKey) {
 
 Write-Host "MS Office Product Key:" $officeKey
 # This can write to your Asset Custom Fields. Use it to store adhoc information that isn't currently surfaced.
-Set-Asset-Field -Name "Office_Key" -Value $officeKey
+#Set-Asset-Field -Name "Office_Key" -Value $officeKey
