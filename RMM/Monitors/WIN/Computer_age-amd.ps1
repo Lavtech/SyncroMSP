@@ -14,7 +14,7 @@ Write-Host "CPU Name: $CpuName"
 
 # Extract and simplify CPU model name using regex
 if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
-    $modelMatch = $CpuInfo.Name -match '(i[3579]-\d{4,5}[A-Z]*)'
+    $modelMatch = $CpuInfo.Name -match '(i[3579]-\d{4,5})'
     if ($modelMatch) {
         $simplifiedModel = $matches[0]  # This uses the automatic $matches array provided by PowerShell
         Write-Host "Simplified CPU Model: $simplifiedModel"
@@ -25,23 +25,20 @@ if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
     Write-Host "CPU Manufacturer not recognized or not specified."
 }
 
-# Remove the first three characters
-$processedModel = $simplifiedModel.Substring(3)
-
-# Use regex to remove any non-numeric characters from the end of the string
-$finalModel = $processedModel -replace '[^\d]+$', ''
+# Remove any digits or letters at the end of the number
+$processedModel = $simplifiedModel -replace '\D*$'
 
 # Output the modified model
-Write-Host "Processed CPU Model: $finalModel"
+Write-Host "Processed CPU Model: $processedModel"
 
 # Search for CPU name in the Intel list and retrieve year
 if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
-    $FoundCPU = $response.Intel | Where-Object { $_.Model -eq $simplifiedModel }
+    $FoundCPU = $response.Intel | Where-Object { $_.Model -eq $processedModel }
     if ($FoundCPU) {
         $CpuYear = $FoundCPU.Year
         Write-Host "CPU Year: $CpuYear"
     } else {
-        Write-Host "CPU model $simplifiedModel not found in the Intel list."
+        Write-Host "CPU model $processedModel not found in the Intel list."
     }
 } else {
     Write-Host "CPU Manufacturer not recognized or not specified."
