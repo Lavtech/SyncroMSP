@@ -25,14 +25,15 @@ if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
     Write-Host "CPU Manufacturer not recognized or not specified."
 }
 
-# Remove any digits or letters at the end of the number
-$processedModel = $simplifiedModel -replace '\D*$'
 
 # Output the modified model
-Write-Host "Processed CPU Model: $processedModel"
+#Write-Host "Processed CPU Model: $processedModel"
 
 # Search for CPU name in the Intel list and retrieve year
 if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
+    # Remove any digits or letters at the end of the number
+    $processedModel = $simplifiedModel -replace '\D*$'
+
     $FoundCPU = $response.Intel | Where-Object { $_.Model -eq $processedModel }
     if ($FoundCPU) {
         $CpuYear = $FoundCPU.Year
