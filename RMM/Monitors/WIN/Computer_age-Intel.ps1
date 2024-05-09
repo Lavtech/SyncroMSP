@@ -37,6 +37,13 @@ if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
     if ($FoundCPU) {
         $CpuYear = $FoundCPU.Year
         Write-Host "CPU Year: $CpuYear"
+
+        # Get current year
+        $CurrentYear = Get-Date -Format "yyyy"
+
+        # Calculate PC age
+        $PC_Age = $CurrentYear - $CpuYear
+        Write-Host "PC Age: $PC_Age years"
     } else {
         # Debugging: Output all Intel models to see if there's a discrepancy
         Write-Host "All Intel models:"
