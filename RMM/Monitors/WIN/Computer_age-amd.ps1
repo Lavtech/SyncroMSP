@@ -74,4 +74,4 @@ if ($CpuInfo.Manufacturer -eq "GenuineIntel") {
 }
 
 Write-Host "Adding this info to the asset custom field PC_Age_In_Years"
-Set-Asset-Field -Name "PC_Age_In_Years" -Value $pc_age
+Set-Asset-Field -Name "PC_Age_In_Years" -Value $PC_age
