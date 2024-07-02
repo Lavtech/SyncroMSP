@@ -3,7 +3,7 @@ import json
 
 def main():
     api_url = 'https://lavtech.syncromsp.com/api/v1/'
-    headers = {'Authorization': 'Bearer T32cb3794c45db370e-87ff666818e21d72f5e3273164b02c89'}
+    headers = {'Authorization': 'Bearer '}
     search_url = f"{api_url}invoices?unpaid=true&since_updated_at=2024-04-20"
 
     try:

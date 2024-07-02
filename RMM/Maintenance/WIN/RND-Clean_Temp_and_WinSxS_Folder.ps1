@@ -12,12 +12,12 @@
    PowerShell v3
 #>
 
-Import-Module $env:SyncroModule
+
 
 # Enter your Company information here:
-$subdomain = "vitaltechservices"
-$email = "tim.golden@vitaltechservices.com"
-$TicketTime = 5  # This is the number of minutes you want added to the ticket
+$subdomain = "lavtech"
+$email = "john@lavtechcomputers.com"
+$TicketTime = 0  # This is the number of minutes you want added to the ticket
 # get some disk info
 
 $Before = Get-WmiObject Win32_LogicalDisk | Where-Object { $_.DriveType -eq "3" } | Select-Object SystemName,
